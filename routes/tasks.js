@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { getTasks, postTask, updateTask, deleteTask } from "../controllers/tasks.js";
+import { getTasks, postTask, updateTask, deleteTask, toggleActiveTask} from "../controllers/tasks.js";
 
 const taskRouter = Router();
 
@@ -11,5 +11,9 @@ taskRouter.route("/")
 taskRouter.route("/:id")
     .put(updateTask)
     .delete(deleteTask)
+
+taskRouter.route("completed/:id")
+    .put(toggleActiveTask)
+
 
 export default taskRouter
