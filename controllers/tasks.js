@@ -33,10 +33,27 @@ export async function updateTask(req, res) {
     }
 }
 
-export async function deleteTask(req,res) {
+export async function deleteTask(req, res) {
     try {
         const task = await Task.findByIdAndDelete(req.params.id);
         res.json(task);
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json({ message: err.message });
+    }
+}
+
+export async function toggleActiveTask(req, res) {
+    try {
+        const task = await Task.findById(req.params.id);
+        if (task.completed) {
+            task.completed = false;
+        }
+        else {
+            task.completed = true;
+        }
+        await task.save()
     }
     catch (err) {
         console.log(err)
