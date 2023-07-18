@@ -12,7 +12,7 @@ taskRouter.route("/:id")
     .put(updateTask)
     .delete(deleteTask)
 
-taskRouter.route("completed/:id")
+taskRouter.route("/completed/:id")
     .put(toggleActiveTask)
 
 

@@ -47,13 +47,10 @@ export async function deleteTask(req, res) {
 export async function toggleActiveTask(req, res) {
     try {
         const task = await Task.findById(req.params.id);
-        if (task.completed) {
-            task.completed = false;
-        }
-        else {
-            task.completed = true;
-        }
+        console.log(task)
+        task.completed = !task.completed
         await task.save()
+        res.json(task)
     }
     catch (err) {
         console.log(err)
