@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import taskRouter from "./routes/tasks.js";
+import categoryRouter from "./routes/categories.js";
 
 dotenv.config()
 
@@ -14,10 +15,12 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/tasks", taskRouter);
+app.use("/categories", categoryRouter)
+
 app.use("/", (req, res) => {
-    res.json({ message: "Hello!",
-    teams: "http://localhost:3000/teams",
-    players: "http://localhost:3000/players" });
+    res.json({
+        message: "Hello!",
+    });
 })
 async function connectToDB() {
     try {
