@@ -57,3 +57,14 @@ export async function toggleActiveTask(req, res) {
         res.status(500).json({ message: err.message });
     }
 }
+
+export async function getTasksByCategory(req, res) {
+    try {
+        const tasks = await Task.find({ category: req.params.category });
+        res.json(tasks)
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json({ message: err.message });
+    }
+}
