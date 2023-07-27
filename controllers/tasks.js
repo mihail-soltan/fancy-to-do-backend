@@ -2,6 +2,7 @@ import Task from "../models/task.js";
 
 export async function getTasks(req, res) {
     try {
+        console.log(req.user)
         const tasks = await Task.find();
         res.status(200).json(tasks);
     }
@@ -61,6 +62,28 @@ export async function toggleActiveTask(req, res) {
 export async function getTasksByCategory(req, res) {
     try {
         const tasks = await Task.find({ category: req.params.category });
+        res.json(tasks)
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json({ message: err.message });
+    }
+}
+
+export async function getAllTasksByUser(req, res) {
+    try {
+        const tasks = await Task.find({ created_by: req.params.userId });
+        res.json(tasks)
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json({ message: err.message });
+    }
+}
+
+export async function getUserTasksByCategory(req, res) {
+    try {
+        const tasks = await Task.find({ created_by: req.params.userId, category: req.params.category });
         res.json(tasks)
     }
     catch (err) {

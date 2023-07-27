@@ -1,12 +1,15 @@
 import { Router } from "express";
 
-import { getTasks, postTask, updateTask, deleteTask, toggleActiveTask, getTasksByCategory} from "../controllers/tasks.js";
+import { getTasks, postTask, updateTask, deleteTask, toggleActiveTask, getTasksByCategory, getAllTasksByUser, getUserTasksByCategory} from "../controllers/tasks.js";
 
 const taskRouter = Router();
 
 taskRouter.route("/")
     .get(getTasks)
     .post(postTask)
+
+taskRouter.route("/user/:userId")
+    .get(getAllTasksByUser)
 
 taskRouter.route("/:id")
     .put(updateTask)
@@ -15,7 +18,10 @@ taskRouter.route("/:id")
 taskRouter.route("/completed/:id")
     .put(toggleActiveTask)
 
-taskRouter.route("/category/:category") 
-    .get(getTasksByCategory)
+// taskRouter.route("/category/:category") 
+//     .get(getTasksByCategory)
+
+taskRouter.route("user/:userId/category/:category") 
+    .get(getUserTasksByCategory)
 
 export default taskRouter

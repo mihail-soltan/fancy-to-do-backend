@@ -37,7 +37,7 @@ export async function login(req, res) {
                 res.json({ success: false, error: "Wrong password" })
             } else {
                 const token = jsonwebtoken.sign({ id: user._id, email: user.email }, process.env.SECRET_JWT_CODE)
-                res.json({ success: true, token: token, username: user.username })
+                res.json({ success: true, token: token, user: user })
             }
         }
     } catch (err) {
