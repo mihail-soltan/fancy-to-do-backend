@@ -10,6 +10,16 @@ export async function getCategories(req, res) {
     }
 }
 
+export async function getCategoriesByUser(req, res) {
+    try {
+        const categories = await Category.find({ created_by: req.params.userId })
+        res.status(200).json(categories)
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
 export async function postCategory(req, res) {
     try {
         // const { name, createdBy } = req.body;
