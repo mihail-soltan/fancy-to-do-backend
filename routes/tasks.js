@@ -21,7 +21,7 @@ taskRouter.route("/completed/:id")
 // taskRouter.route("/category/:category") 
 //     .get(getTasksByCategory)
 
-taskRouter.route("user/:userId/category/:category") 
+taskRouter.route("/user/:userId/category/:category") 
     .get(getUserTasksByCategory)
 
 export default taskRouter
