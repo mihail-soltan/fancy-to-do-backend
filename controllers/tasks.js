@@ -83,8 +83,13 @@ export async function getAllTasksByUser(req, res) {
 
 export async function getUserTasksByCategory(req, res) {
     try {
-        const tasks = await Task.find({ created_by: req.params.userId, category: req.params.category });
-        res.json(tasks)
+
+        if (req.params.category) {
+            const tasks = await Task.find({ created_by: req.params.userId, category: req.params.category });
+            return res.json(tasks)
+        }
+        const allTasks = await Task.find({ created_by: req.params.userId })
+        return res.json(allTasks)
     }
     catch (err) {
         console.log(err)
