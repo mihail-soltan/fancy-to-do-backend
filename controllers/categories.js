@@ -23,7 +23,7 @@ export async function getCategoriesByUser(req, res) {
 export async function postCategory(req, res) {
     try {
         // const { name, createdBy } = req.body;
-        const categoryExists = await Category.findOne({ name: req.body.name })
+        const categoryExists = await Category.findOne({ name: req.body.name, created_by: req.body.created_by })
         if (categoryExists) {
             res.status(500).json({ message: `Category ${categoryExists.name} already exists` });
             return;
